@@ -8,48 +8,48 @@ package knowledgegraph.normalizer;
 import java.util.List;
 
 /**
- *
+ * Persian character normalizer
  * @author morteza.khaleghi
  */
 public class PersianCharNormalizer {
 
-    public static final char FARSI_YEH = '\u06CC';
+    private static final char FARSI_YEH = '\u06CC';
 
-    public static final char ARABIC_YEH = '\u064A';
+    private static final char ARABIC_YEH = '\u064A';
 
-    public static final char YEH_BARREE = '\u06D2';
+    private static final char YEH_BARREE = '\u06D2';
 
-    public static final char YEH_BARREE_HAMZA_ABOV = '\u06D3';
+    private static final char YEH_BARREE_HAMZA_ABOV = '\u06D3';
 
-    public static final char YEH_MAKSURA = '\u0649';
+    private static final char YEH_MAKSURA = '\u0649';
 
-    public static final char YEH_HAMZA_ABOV = '\u0626';
+    private static final char YEH_HAMZA_ABOV = '\u0626';
 
-    public static final char YEH_POINT_BELOV = '\u06D0';
+    private static final char YEH_POINT_BELOV = '\u06D0';
 
-    public static final char FARSI_KEH = '\u06A9';
+    private static final char FARSI_KEH = '\u06A9';
 
-    public static final char ARABIC_KAF = '\u0643';
+    private static final char ARABIC_KAF = '\u0643';
 
-    public static final char HEH_YEH_ABOV = '\u06C0';
+    private static final char HEH_YEH_ABOV = '\u06C0';
 
-    public static final char HEH_GOAL = '\u06C1';
+    private static final char HEH_GOAL = '\u06C1';
 
-    public static final char HEH_GOAL_HAMZA_ABOV = '\u06C2';
+    private static final char HEH_GOAL_HAMZA_ABOV = '\u06C2';
     
-    public static final char HEH_DOCHASHME = '\u06BE';
+    private static final char HEH_DOCHASHME = '\u06BE';
 
-    public static final char HEH = '\u0647';
+    private static final char HEH = '\u0647';
     
-    public static final char WAW = '\u0648';
+    private static final char WAW = '\u0648';
     
-    public static final char WAW_HAMZA_ABOV = '\u0624';
+    private static final char WAW_HAMZA_ABOV = '\u0624';
     
-    public static final char WAW_HIGHT_HAMZA = '\u0676';
+    private static final char WAW_HIGHT_HAMZA = '\u0676';
 
-    public static final char ALEF = '\u0627';
-    public static final char ALEF_MADDA_ABOV = '\u0622';
-    public static final char ALEF_HAMZA_ABOV = '\u0623';
+    private static final char ALEF = '\u0627';
+    private static final char ALEF_MADDA_ABOV = '\u0622';
+    private static final char ALEF_HAMZA_ABOV = '\u0623';
 
     private boolean enableNormalYEH = false,
             enableNormalKAF = false,
@@ -59,7 +59,7 @@ public class PersianCharNormalizer {
             enableNormalNUMBERS = false;
 
     /**
-     * create PersianChrNormalizer with all options enabled
+     * create PersianCharNormalizer with all normalization options enabled
      */
     public PersianCharNormalizer() {
         enableNormalYEH = true;
@@ -71,8 +71,8 @@ public class PersianCharNormalizer {
     }
 
     /**
-     * create PersianChrNormalizer with desired options
-     * @param normalizerOptions list of desired options
+     * create PersianCharNormalizer with desired options
+     * @param normalizerOptions list of PersianCharNormalizer.Option enum
      */
     public PersianCharNormalizer(List<Option> normalizerOptions) {
         initNormalizerOptions(normalizerOptions);
@@ -106,6 +106,11 @@ public class PersianCharNormalizer {
         }
     }
 
+    /**
+     *normalize input string based of defined PersianCharNormalizer Options
+     * @param text input string
+     * @return normalized string
+     */
     public String normalize(String text) {
         if (text == null || text.isEmpty()) {
             return text;
@@ -248,32 +253,32 @@ public class PersianCharNormalizer {
     public enum Option {
 
         /**
-         *
+         *convert various type of arabic Yeh to persian Yeh ('ي','ے','ۓ','ى','ئ','ې') => 'ی'
          */
         NORMAL_YEH,
 
         /**
-         *
+         *convert arabic Kaf to persian Kaf ('ك') => 'ک'
          */
         NORMAL_KAF,
 
         /**
-         *
+         *convert various type of He to persian He ('ۀ','ہ','ۂ','ھ') => 'ه'
          */
         NORMAL_HE,
 
         /**
-         * 
+         *convert Alef with Madda and Alef with Hamza to normal Alef ('آ','أ') => 'ا'
          */
         NORMAL_ALEF,
 
         /**
-         * 
+         *convert Waw with Hamza to normal Waw ('ؤ','ٶ') => 'و'
          */
         NORMAL_WAW,
 
         /**
-         * convert arabic and persian numbers to english numbers
+         * convert arabic and persian numbers to english numbers ('١','٢',...) => '1','2',...
          */
         NORMAL_NUMBERS
     }
