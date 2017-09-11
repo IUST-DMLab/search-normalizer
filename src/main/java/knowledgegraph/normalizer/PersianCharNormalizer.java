@@ -160,7 +160,7 @@ public class PersianCharNormalizer {
     private char normalizeYeh(char c) {
         if (c == ARABIC_YEH || c == YEH_BARREE
                 || c == YEH_BARREE_HAMZA_ABOV || c == YEH_MAKSURA
-                || c == YEH_HAMZA_ABOV || c == YEH_POINT_BELOV) {
+                /*|| c == YEH_HAMZA_ABOV*/ || c == YEH_POINT_BELOV) {
             c = FARSI_YEH;
         }
         return c;
